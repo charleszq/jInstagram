@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project name="jInstagram" default="jar" basedir=".">
 
-	<property name="src.dir" value="src" />
+	<property name="src.dir" value="src/java/main" />
 	<property name="bin.dir" value="target" />
 	<property name="jar.file" value="jInstagram-1.0.0.jar" />
 	<property name="src.jar.file" value="jInstagram-1.0.0-sources.jar"/>
