@@ -59,6 +59,20 @@ public class AdvancedInstagram extends Instagram {
 
 		return userFeed;
 	}
+	
+	public MediaFeed getUserLikedMediaFeed(int count) throws InstagramException {
+		if( count <= 0 ) {
+			return super.getUserLikedMediaFeed();
+		}
+		
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("count", String.valueOf(count));
+
+		MediaFeed userLikedMedia = this.createInstagramObject(Verbs.GET, MediaFeed.class,
+				Methods.USERS_SELF_LIKED_MEDIA, params);
+
+		return userLikedMedia;
+	}
 
 	public MediaFeed getNextPage(Pagination pagination, int count)
 			throws InstagramException {
