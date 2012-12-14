@@ -11,6 +11,9 @@ Note : jInstagram uses code from the [scribe-java] (https://github.com/fernandez
 * Changed 2 methods in 'Instagram' from 'private' to 'protected';
 * Add an ANT script to build jar and source jar files.
 
+##Note:
+Add these methods to support my own application, will deprecate this once the parent code line of this has these features added.
+
 ##Usage
 
 * Create the InstagramService object
