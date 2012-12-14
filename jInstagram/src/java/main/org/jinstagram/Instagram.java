@@ -506,7 +506,7 @@ public class Instagram {
 	 * @return
 	 * @throws InstagramException
 	 */
-	private <T> T createInstagramObject(Verbs verbs, Class<T> clazz, String methodName, Map<String, String> params)
+	protected <T> T createInstagramObject(Verbs verbs, Class<T> clazz, String methodName, Map<String, String> params)
 			throws InstagramException {
 		Response response = getApiResponse(verbs, methodName, params);
 
@@ -569,7 +569,7 @@ public class Instagram {
 	 * @return a object of type <T>
 	 * @throws InstagramException if any error occurs.
 	 */
-	private <T> T createObjectFromResponse(Class<T> clazz, final String response) throws InstagramException {
+	protected <T> T createObjectFromResponse(Class<T> clazz, final String response) throws InstagramException {
 		Gson gson = new Gson();
 		T object = null;
 

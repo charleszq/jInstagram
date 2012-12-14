@@ -3,6 +3,13 @@
 A Java wrapper for the [Instagram API](http://instagram.com/developer/).
 
 Note : jInstagram uses code from the [scribe-java] (https://github.com/fernandezpablo85/scribe-java) library developed by [Pablo Fernandez] (https://github.com/fernandezpablo85). 
+##Changes:
+
+* Create 'AdvancedInstagram' java class which extends 'Instagram';
+* Add methods to let user specify how many media feed to return;
+* Add method to get the next page of media feeds;
+* Changed 2 methods in 'Instagram' from 'private' to 'protected';
+* Add an ANT script to build jar and source jar files.
 
 ##Usage
 

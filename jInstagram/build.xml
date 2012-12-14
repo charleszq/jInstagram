@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<project name="jInstagram" default="jar" basedir=".">
+
+	<property name="src.dir" value="src" />
+	<property name="bin.dir" value="target" />
+	<property name="jar.file" value="jInstagram-1.0.0.jar" />
+	<property name="src.jar.file" value="jInstagram-1.0.0-sources.jar"/>
+
+	<target name="clean">
+		<delete dir="${bin.dir}" />
+		<delete file="${jar.file}"/>
+		<delete file="${src.jar.file}"/>
+	</target>
+
+	<target name="compile" depends="clean">
+		<mkdir dir="${bin.dir}" />
+		<javac srcdir="${src.dir}" destdir="${bin.dir}" classpath="lib/gson-2.2.2.jar"
+			includeantruntime="false" source="1.6" />
+	</target>
+	<target name="jar" depends="compile">
+		<jar destfile="${jar.file}" basedir="${bin.dir}" />
+		<jar destfile="${src.jar.file}" basedir="${src.dir}"/>
+	</target>
+</project>
