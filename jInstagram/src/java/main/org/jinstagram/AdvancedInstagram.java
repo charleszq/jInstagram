@@ -14,6 +14,7 @@ import org.jinstagram.exceptions.InstagramException;
 import org.jinstagram.http.Response;
 import org.jinstagram.http.Verbs;
 import org.jinstagram.model.Methods;
+import org.jinstagram.utils.Preconditions;
 
 /**
  * @author charles (charleszq@gmail.com)
@@ -59,17 +60,17 @@ public class AdvancedInstagram extends Instagram {
 
 		return userFeed;
 	}
-	
+
 	public MediaFeed getUserLikedMediaFeed(int count) throws InstagramException {
-		if( count <= 0 ) {
+		if (count <= 0) {
 			return super.getUserLikedMediaFeed();
 		}
-		
+
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("count", String.valueOf(count));
 
-		MediaFeed userLikedMedia = this.createInstagramObject(Verbs.GET, MediaFeed.class,
-				Methods.USERS_SELF_LIKED_MEDIA, params);
+		MediaFeed userLikedMedia = this.createInstagramObject(Verbs.GET,
+				MediaFeed.class, Methods.USERS_SELF_LIKED_MEDIA, params);
 
 		return userLikedMedia;
 	}
@@ -77,6 +78,9 @@ public class AdvancedInstagram extends Instagram {
 	public MediaFeed getNextPage(Pagination pagination, int count)
 			throws InstagramException {
 
+		if (pagination == null || pagination.getNextUrl() == null) {
+			return null;
+		}
 		OAuthRequest request = new OAuthRequest(Verbs.GET,
 				pagination.getNextUrl());
 		request.addQuerystringParameter("count", String.valueOf(count));
@@ -84,6 +88,25 @@ public class AdvancedInstagram extends Instagram {
 		MediaFeed feed = createObjectFromResponse(MediaFeed.class,
 				response.getBody());
 		return feed;
+	}
+
+	public MediaFeed getRecentMediaFeed(long userId, int count)
+			throws InstagramException {
+
+		if (count <= 0) {
+			return super.getRecentMediaFeed(userId);
+		}
+
+		Preconditions.checkNotNull(userId, "UserId cannot be null.");
+
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("count", String.valueOf(count));
+
+		String methodName = String.format(Methods.USERS_RECENT_MEDIA, userId);
+		MediaFeed recentMediaFeed = this.createInstagramObject(Verbs.GET,
+				MediaFeed.class, methodName, params);
+
+		return recentMediaFeed;
 	}
 
 }
