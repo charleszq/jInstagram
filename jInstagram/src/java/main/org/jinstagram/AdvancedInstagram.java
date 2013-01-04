@@ -14,6 +14,7 @@ import org.jinstagram.exceptions.InstagramException;
 import org.jinstagram.http.Response;
 import org.jinstagram.http.Verbs;
 import org.jinstagram.model.Methods;
+import org.jinstagram.model.QueryParam;
 import org.jinstagram.utils.Preconditions;
 
 /**
@@ -107,6 +108,21 @@ public class AdvancedInstagram extends Instagram {
 				MediaFeed.class, methodName, params);
 
 		return recentMediaFeed;
+	}
+
+	public MediaFeed searchMedia(double latitude, double longitude,
+			int distance, int count) throws InstagramException {
+		Map<String, String> params = new HashMap<String, String>();
+
+		params.put(QueryParam.LATITUDE, Double.toString(latitude));
+		params.put(QueryParam.LONGITUDE, Double.toString(longitude));
+		params.put(QueryParam.DISTANCE, Integer.toString(distance));
+		params.put(QueryParam.COUNT, Integer.toString(count));
+
+		MediaFeed mediaFeed = createInstagramObject(Verbs.GET, MediaFeed.class,
+				Methods.MEDIA_SEARCH, params);
+
+		return mediaFeed;
 	}
 
 }
