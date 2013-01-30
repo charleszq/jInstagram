@@ -10,6 +10,7 @@ import org.jinstagram.auth.model.OAuthRequest;
 import org.jinstagram.auth.model.Token;
 import org.jinstagram.entity.common.Pagination;
 import org.jinstagram.entity.users.feed.MediaFeed;
+import org.jinstagram.entity.users.feed.UserFeed;
 import org.jinstagram.exceptions.InstagramException;
 import org.jinstagram.http.Response;
 import org.jinstagram.http.Verbs;
@@ -87,6 +88,20 @@ public class AdvancedInstagram extends Instagram {
 		request.addQuerystringParameter("count", String.valueOf(count));
 		Response response = request.send();
 		MediaFeed feed = createObjectFromResponse(MediaFeed.class,
+				response.getBody());
+		return feed;
+	}
+
+	public UserFeed getUserNextPage(Pagination pagination, int count)
+			throws InstagramException {
+		if (pagination == null || pagination.getNextUrl() == null) {
+			return null;
+		}
+		OAuthRequest request = new OAuthRequest(Verbs.GET,
+				pagination.getNextUrl());
+		request.addQuerystringParameter("count", String.valueOf(count));
+		Response response = request.send();
+		UserFeed feed = createObjectFromResponse(UserFeed.class,
 				response.getBody());
 		return feed;
 	}
